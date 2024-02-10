@@ -9,10 +9,10 @@
     @foreach ($blogs as $blog)
     <article class="p-6 rounded-lg border-2 shadow-lg max-h-48 border-gray-600">
         <h2>
-            <a href="/dashboard/{{ $blog["slug"] }}" class="text-xl font-bold mb-2">{{ $blog["title"] }}</a>
+            <a href="/dashboard/{{ $blog->slug }}" class="text-xl font-bold mb-2">{{ $blog->title }}</a>
         </h1>
-        <h5 class="text-base text-gray-600 mb-2">{{ $blog["author"] }}</h5>
-        <p class="text-sm text-gray-700 line-clamp-3">{{ $blog["body"] }}</p>
+        <h5 class="text-base text-gray-600 mb-2">{{ $blog->author }}</h5>
+        <div class="text-sm text-gray-700 line-clamp-3">{!! $blog->body !!}</div>
     </article>
     @endforeach
 </div>

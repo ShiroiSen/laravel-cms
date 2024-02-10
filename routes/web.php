@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 
@@ -19,20 +20,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard', [
-        "title" => "Dashboard",
-        "blogs" => Blog::all()
-    ]);
-});
+Route::get('/dashboard', [BlogController::class, 'index']);
 
-Route::get('dashboard/{slug}', function ($slug) {
-    
-    return view('blog ', [
-        "title" => "Single Post",
-        "blog" => Blog::find($slug)
-    ]);
-});
+Route::get('dashboard/{blog:slug}',[BlogController::class, 'show']);
 
 Route::get('/tag', function () {
     return view('tag', [

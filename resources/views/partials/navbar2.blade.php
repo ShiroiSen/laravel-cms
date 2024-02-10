@@ -9,7 +9,7 @@
 <body>
     <div class="flex items-center justify-around bg-gray-900 p-4 font-semibold">
         <!-- Bagian kiri -->
-        <a href="/dashboard"class="flex items-center">
+        <a href="/dashboard" class="flex items-center">
             <p id="myText" class="text-white opacity-0 transition-opacity duration-1000">Back</p>
         </a>
     
@@ -30,7 +30,7 @@
     <script>
         setTimeout(function() {
             document.getElementById("myText").classList.add("opacity-100");
-        }, 250); // Tulisan akan muncul setelah 2000 milidetik (2 detik)
+        }, 250);
     </script>
 </body>
 </html>

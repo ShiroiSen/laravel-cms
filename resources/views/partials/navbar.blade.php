@@ -11,7 +11,7 @@
         <!-- Bagian kiri -->
         <div class="flex items-center">
             <a href="/dashboard">
-                <p class="text-white text-lg">
+                <p id="myText" class="text-white text-lg opacity-0 transition-opacity duration-1000">
                     Blog<span class="text-blue-700 hover:text-red-700">ID</span>
                 </p>
             </a>    
@@ -29,6 +29,12 @@
             <a href="/mail" class="text-white hover:text-blue-700">Mail</a>
             <a href="#" class="text-white hover:text-blue-700">Profile</a>
         </div>
+
+        <script>
+            setTimeout(function() {
+                document.getElementById("myText").classList.add("opacity-100");
+            }, 250);
+        </script>
     </div>
 </body>
 </html>
