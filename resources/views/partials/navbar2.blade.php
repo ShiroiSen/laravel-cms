@@ -9,17 +9,19 @@
 <body>
     <div class="flex items-center justify-around bg-gray-900 p-4 font-semibold">
         <!-- Bagian kiri -->
-        <a href="/dashboard" class="flex items-center">
-            <p id="myText" class="text-white opacity-0 transition-opacity duration-1000">Back</p>
-        </a>
-    
+        <div class="flex items-center">
+            <a href="/dashboard" class="text-white hover:text-blue-700">
+                <p id="myText" class="opacity-0 transition-opacity duration-1000">< Back</p>
+            </a>
+        </div>
+
         <!-- Bagian tengah -->
         <div class="flex items-center ">
             <a href="/dashboard" class="text-white hover:text-blue-700 py-2 px-3">Dashboard</a>
-            <a href="/tag" class="text-white hover:text-blue-700 py-2 px-3">Tag</a>
+            <a href="/categories" class="text-white hover:text-blue-700 py-2 px-3">Categories</a>
             <a href="/yourBlog" class="text-white hover:text-blue-700 py-2 px-3">Your Blog</a>
         </div>
-    
+
         <!-- Bagian kanan -->
         <div class="flex items-center space-x-4">
             <a href="/mail" class="text-white hover:text-blue-700">Mail</a>

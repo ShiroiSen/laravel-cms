@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,13 +23,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', [BlogController::class, 'index']);
 
-Route::get('dashboard/{blog:slug}',[BlogController::class, 'show']);
+Route::get('/dashboard/{blog:slug}',[BlogController::class, 'show']);
 
-Route::get('/tag', function () {
-    return view('tag', [
-        "title" => "Tag"
+Route::get('/categories', function () {
+    return view('categories', [
+        'title' => 'Blog Categories',
+        'categories' => \App\Models\Category::all()
     ]);
 });
+
+Route::get('/categories/{category:slug}', function(Category $category){
+    return view('category', [
+        'title' => $category->name,
+        'blogs' => $category->blogs,
+        'category' => $category->name
+    ]);
+});
+
+
 
 Route::get('/yourBlog', function () {
     return view('yourBlog', [

@@ -1,10 +1,13 @@
 @extends('layouts.blog-detail')
 
 @section('container')
-<div class="m-10">
-    <div class="p-6 rounded-lg border shadow-lg border-gray-900">
+<div class="p-5">
+    <div class="p-6 rounded-lg border border-gray-400"">
         <h2 class="font-bold text-center text-4xl">{{ $blog->title }}</h2>
-        <h5 class="text-center text-2xl">{{ $blog->author }}</h5>
+        {{-- <h5 class="text-center text-2xl">{{ $blog->author }}</h5> --}}
+        <div class=" flex justify-center">
+            <a href="/categories/{{ $blog->category->slug }}" class="text-2xl italic">#{{ $blog->category->name }}</a>
+        </div>
         <br>
         {!! $blog->body !!}
     </div>

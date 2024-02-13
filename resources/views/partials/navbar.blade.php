@@ -11,7 +11,7 @@
         <!-- Bagian kiri -->
         <div class="flex items-center">
             <a href="/dashboard">
-                <p id="myText" class="text-white text-lg opacity-0 transition-opacity duration-1000">
+                <p class="text-white text-lg">
                     Blog<span class="text-blue-700 hover:text-red-700">ID</span>
                 </p>
             </a>    
@@ -19,9 +19,9 @@
     
         <!-- Bagian tengah -->
         <div class="flex items-center ">
-            <a href="/dashboard" class="text-white hover:text-blue-700 py-2 px-3">Dashboard</a>
-            <a href="/tag" class="text-white hover:text-blue-700 py-2 px-3">Tag</a>
-            <a href="/yourBlog" class="text-white hover:text-blue-700 py-2 px-3">Your Blog</a>
+            <a href="/dashboard" class="text-white hover:text-blue-700 py-2 px-3 {{ ($title === "Dashboard") ? '!text-blue-700' : '' }}">Dashboard</a>
+            <a href="/categories" class="text-white hover:text-blue-700 py-2 px-3 {{ ($title === "Categories") ? '!text-blue-700' : '' }}">Categories</a>
+            <a href="/yourBlog" class="text-white hover:text-blue-700 py-2 px-3 {{ ($title === "Your Blog") ? '!text-blue-700' : '' }}">Your Blog</a>
         </div>
     
         <!-- Bagian kanan -->
@@ -29,12 +29,6 @@
             <a href="/mail" class="text-white hover:text-blue-700">Mail</a>
             <a href="#" class="text-white hover:text-blue-700">Profile</a>
         </div>
-
-        <script>
-            setTimeout(function() {
-                document.getElementById("myText").classList.add("opacity-100");
-            }, 250);
-        </script>
     </div>
 </body>
 </html>
