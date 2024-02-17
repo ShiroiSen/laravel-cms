@@ -1,4 +1,4 @@
-@extends('layouts.blog-detail')
+@extends('layouts.detail')
 
 @section('container')
 <div class="p-5">
@@ -6,7 +6,7 @@
         <h2 class="font-bold text-center text-4xl">{{ $blog->title }}</h2>
         {{-- <h5 class="text-center text-2xl">{{ $blog->author }}</h5> --}}
         <div class=" flex justify-center">
-            <a href="/categories/{{ $blog->category->slug }}" class="text-2xl italic">#{{ $blog->category->name }}</a>
+            <p>By. <a href="/authors/{{ $blog->user->username }}" class="text-blue-500">{{ $blog->user->name }} <span class="text-black"> in </span> <a href="/categories/{{ $blog->category->slug }}" class="text-blue-500">{{ $blog->category->name }}</a></a></p>
         </div>
         <br>
         {!! $blog->body !!}

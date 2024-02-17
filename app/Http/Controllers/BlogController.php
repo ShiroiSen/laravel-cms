@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Blog;
 
 class BlogController extends Controller
 {
@@ -10,11 +11,11 @@ class BlogController extends Controller
     {
         return view('dashboard', [
             "title" => "Dashboard",
-            "blogs" => \App\Models\Blog::all()
+            "blogs" => Blog::with(['user' , 'category'])->latest()->get()
         ]);
     }
     
-    public function show(\App\Models\Blog $blog)
+    public function show(Blog $blog)
     {
         return view('blog ', [
             "title" => "$blog->title",
