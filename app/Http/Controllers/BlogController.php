@@ -9,9 +9,9 @@ class BlogController extends Controller
 {
     public function index()
     {
-        return view('dashboard', [
-            "title" => "Dashboard",
-            "blogs" => Blog::with(['user' , 'category'])->latest()->get()
+        return view('blogs', [
+            "title" => "Blogs",
+            "blogs" => Blog::latest()->get()
         ]);
     }
     

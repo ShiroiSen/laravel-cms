@@ -21,7 +21,7 @@
         <div class="flex items-center ">
             <a href="/dashboard" class="text-white hover:text-blue-700 py-2 px-3 {{ ($title === "Dashboard") ? '!text-blue-700' : '' }}">Dashboard</a>
             <a href="/categories" class="text-white hover:text-blue-700 py-2 px-3 {{ ($title === "Categories") ? '!text-blue-700' : '' }}">Categories</a>
-            <a href="/yourBlog" class="text-white hover:text-blue-700 py-2 px-3 {{ ($title === "Your Blog") ? '!text-blue-700' : '' }}">Your Blog</a>
+            <a href="/blogs" class="text-white hover:text-blue-700 py-2 px-3 {{ ($title === "Blogs") ? '!text-blue-700' : '' }}">Blogs</a>
         </div>
     
         <!-- Bagian kanan -->

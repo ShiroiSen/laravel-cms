@@ -21,15 +21,23 @@ use Illuminate\Support\Facades\Route;
 //     return view('landingPage');
 // });
 
-
-Route::get('/dashboard', [BlogController::class, 'index']);
-
-Route::get('/dashboard/{blog:slug}',[BlogController::class, 'show']);
+Route::get('/dashboard', function () {
+    return view('dashboard', [
+        "title" => "Dashboard"
+    ]);
+});
 
 Route::get('/categories', function () {
     return view('categories', [
         'title' => 'Blog Categories',
         'categories' => Category::all()
+    ]);
+});
+
+Route::get('/authors/{user:username}', function(User $user){
+    return view('author', [
+        'title' => $user->name,
+        'blogs' => $user->blogs->load(['user', 'category'])
     ]);
 });
 
@@ -41,18 +49,9 @@ Route::get('/categories/{category:slug}', function(Category $category){
     ]);
 });
 
-Route::get('/authors/{user:username}', function(User $user){
-    return view('author', [
-        'title' => $user->name,
-        'blogs' => $user->blogs->load(['user', 'category'])
-    ]);
-});
+Route::get('/blogs', [BlogController::class, 'index']);
 
-Route::get('/yourBlog', function () {
-    return view('yourBlog', [
-        "title" => "Your Blog"
-    ]);
-});
+Route::get('/blogs/{blog:slug}',[BlogController::class, 'show']);
 
 Route::get('/mail', function () {
     return view('mail', [

@@ -10,7 +10,7 @@
     <div class="flex items-center justify-around bg-gray-900 p-4 font-semibold">
         <!-- Bagian kiri -->
         <div class="flex items-center">
-            <a href="/dashboard" class="text-white hover:text-blue-700">
+            <a href="/blogs" class="text-white hover:text-blue-700">
                 <p id="myText" class="opacity-0 transition-opacity duration-1000">< Back</p>
             </a>
         </div>
@@ -19,7 +19,7 @@
         <div class="flex items-center ">
             <a href="/dashboard" class="text-white hover:text-blue-700 py-2 px-3">Dashboard</a>
             <a href="/categories" class="text-white hover:text-blue-700 py-2 px-3">Categories</a>
-            <a href="/yourBlog" class="text-white hover:text-blue-700 py-2 px-3">Your Blog</a>
+            <a href="/blogs" class="text-white hover:text-blue-700 py-2 px-3">Blogs</a>
         </div>
 
         <!-- Bagian kanan -->
