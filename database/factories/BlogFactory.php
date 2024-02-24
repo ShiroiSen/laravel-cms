@@ -19,9 +19,9 @@ class BlogFactory extends Factory
         return [
             'title' => fake()->sentence(mt_rand(2, 4)),
             'slug' => fake()->slug(),
-            'body' => fake()->paragraph(mt_rand(5, 100)),
+            'body' => collect(fake()->paragraphs(mt_rand(5, 100)))->map(fn($p) => "<p>$p</p>")->implode(''),
             'user_id' => mt_rand(1,10),
-            'category_id' => mt_rand(1,4),
+            'category_id' => mt_rand(1,6),
         ];
     }
 }

@@ -9,9 +9,15 @@ class BlogController extends Controller
 {
     public function index()
     {
+        $blogs = Blog::latest();
+
+        if(request('searchblog')) {
+            $blogs->where('title', 'like', '%' . request('search') . '%');
+        }
+
         return view('blogs', [
             "title" => "Blogs",
-            "blogs" => Blog::latest()->get()
+            "blogs" => $blogs->paginate(12)
         ]);
     }
     
