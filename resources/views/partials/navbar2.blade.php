@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="flex items-center justify-around bg-gray-900 p-4 font-semibold">
+    <div class="flex items-center justify-around bg-gray-900 p-4 font-semibold fixed top-0 left-0 right-0 z-[1000]">
         <!-- Bagian kiri -->
         <div class="flex items-center">
             <a href="/blogs" class="text-white hover:text-blue-700">
@@ -24,7 +24,6 @@
 
         <!-- Bagian kanan -->
         <div class="flex items-center space-x-4">
-            <a href="/mail" class="text-white hover:text-blue-700">Mail</a>
             <a href="#" class="text-white hover:text-blue-700">Profile</a>
         </div>
     </div>
