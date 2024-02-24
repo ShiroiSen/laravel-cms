@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\BlogController;
 use App\Models\Blog;
-use App\Models\Category;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,22 +19,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('landingPage');
-// });
+Route::get('/', function () {
+    return view('landingPage',[
+        'title' => 'Landing Page'
+    ]);
+})->name('landingPage');;
 
 Route::get('/dashboard', function () {
     return view('dashboard', [
         "title" => "Dashboard"
     ]);
-});
+})->middleware('auth');
 
 Route::get('/categories', function () {
     return view('categories', [
         'title' => 'Blog Categories',
         'categories' => Category::all()
     ]);
-});
+})->middleware('auth');
 
 Route::get('/authors/{user:username}', function(User $user){
     return view('author', [
@@ -49,9 +53,9 @@ Route::get('/categories/{category:slug}', function(Category $category){
     ]);
 });
 
-Route::get('/blogs', [BlogController::class, 'index']);
+Route::get('/blogs', [BlogController::class, 'index'])->middleware('auth');
 
-Route::get('/blogs/{blog:slug}',[BlogController::class, 'show']);
+Route::get('/blogs/{blog:slug}',[BlogController::class, 'show'])->middleware('auth');
 
 Route::get('/mail', function () {
     return view('mail', [
@@ -60,11 +64,12 @@ Route::get('/mail', function () {
     ]);
 });
 
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
 
-// Route::get('/login', function () {
-//     return view('login');
-// });
+Route::post('/login', [LoginController::class, 'authenticate']);
 
-// Route::get('/register', function () {
-//     return view('register');
-// });
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+
+Route::post('/register', [RegisterController::class, 'store']);

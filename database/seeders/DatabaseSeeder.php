@@ -21,6 +21,11 @@ class DatabaseSeeder extends Seeder
             'name' => 'Programming',
             'slug' => 'programming'
         ]);
+
+        Category::create([
+            'name' => 'Design',
+            'slug' => 'design'
+        ]);
         
         Category::create([
             'name' => 'Food',
@@ -35,6 +40,16 @@ class DatabaseSeeder extends Seeder
         Category::create([
             'name' => 'Story',
             'slug' => 'story'
+        ]);
+
+        Category::create([
+            'name' => 'Game',
+            'slug' => 'game'
+        ]);
+
+        Category::create([
+            'name' => 'Technology',
+            'slug' => 'technology'
         ]);
 
         blog::factory(17)->create();

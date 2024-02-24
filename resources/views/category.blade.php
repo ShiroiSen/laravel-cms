@@ -3,21 +3,30 @@
 @section('container')
 
 
-<div id="blogRender" class="opacity-0 transition-opaycit duration-1000">
+<div id="blogRender" class="opacity-0 transition-opaycit duration-1000 pt-16">
     <div>
         <h1 class="flex items-center justify-center p-4 font-semibold text-2xl">now you are in category :<span class="text-blue-700 ml-2">{{ $category }}</span></h1>
     </div>
     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl rounded-lg px-5 sm:px-16 md:px-36 xl:px-44 ">
         @foreach ($blogs as $blog)
         <div class="flex flex-col rounded-lg border border-gray-400 ">
-            <div class=" flex justify-center align-middle">
-                <img src="https://source.unsplash.com/1900x400/?{{ $blog->category->name }}" class="rounded-t-lg">
-            </div>
+            <a href="/categories/{{ $blog->category->slug }}" class="flex flex-col items-center relative rounded-t-lg overflow-hidden">
+                <div class="min-w-96 min-h-96">
+                    <div class="absolute inset-0 bg-gray-400 animate-pulse"></div>
+                    <img src="https://source.unsplash.com/400x300/?{{ $blog->category->name }}" class="absolute inset-0 w-full h-full object-cover rounded-t-lg" alt="Category Image">
+                </div>
+            </a>`
             <div class="p-3">
                 <div>
                     <a href="/blogs/{{ $blog->slug }}" class="text-xl font-bold mb-2">{{ $blog->title }}</a>
                     <br>
-                    <p>By. <a href="/authors/{{ $blog->user->username }}" class="text-blue-500">{{ $blog->user->name }} <span class="text-black"> in </span> <a href="/categories/{{ $blog->category->slug }}" class="text-blue-500">{{ $blog->category->name }}</a></a></p>
+                    <p>By. 
+                        <a href="/authors/{{ $blog->user->username }}" class="text-blue-500">{{ $blog->user->name }} 
+                            <span class="text-black"> in </span> 
+                            <a href="/categories/{{ $blog->category->slug }}" class="text-blue-500">{{ $blog->category->name }}</a>
+                        </a>
+                        <small>&nbsp;{{ $blog->created_at->diffForHumans() }}</small>
+                    </p>
                 </div>
                 <br>
                 <div class="text-sm text-gray-700 line-clamp-3">{!! $blog->body !!}</div>
