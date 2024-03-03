@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\DashBlogController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 
@@ -26,14 +27,18 @@ Route::get('/', function () {
 })->name('landingPage');;
 
 Route::get('/dashboard', function () {
-    return view('dashboard', [
+    return view('dashboard.general', [
         "title" => "Dashboard"
     ]);
 })->middleware('auth');
 
+Route::get('/dashboard/blogs/checkSlug', [DashBlogController::class, 'checkSlug'])->middleware('auth');
+
+Route::resource('/dashboard/blogs', DashBlogController::class)->middleware('auth');
+
 Route::get('/categories', function () {
     return view('categories', [
-        'title' => 'Blog Categories',
+        'title' => 'Categories',
         'categories' => Category::all()
     ]);
 })->middleware('auth');
