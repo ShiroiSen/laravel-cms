@@ -13,19 +13,25 @@
             <a href="/categories/{{ $blog->category->slug }}" class="flex flex-col items-center relative rounded-t-lg overflow-hidden">
                 <div class="min-w-96 min-h-96">
                     <div class="absolute inset-0 bg-gray-400 animate-pulse"></div>
-                    <img src="https://source.unsplash.com/400x300/?{{ $blog->category->name }}" class="absolute inset-0 w-full h-full object-cover rounded-t-lg" alt="Category Image">
+                    @if ($blog->image)
+                        <img src="{{ asset('storage/' . $blog->image) }}" class="absolute inset-0 w-full h-full object-cover rounded-t-lg" alt="Blog Image">
+                    @else
+                        <img src="https://source.unsplash.com/1900x650/?{{ $blog->category->name }}" class="absolute inset-0 w-full h-full object-cover rounded-t-lg" alt="Blog Image">
+                    @endif
                 </div>
-            </a>`
+            </a>
             <div class="p-3">
                 <div>
                     <a href="/blogs/{{ $blog->slug }}" class="text-xl font-bold mb-2">{{ $blog->title }}</a>
                     <br>
                     <p>By. 
-                        <a href="/authors/{{ $blog->user->username }}" class="text-blue-500">{{ $blog->user->name }} 
-                            <span class="text-black"> in </span> 
-                            <a href="/categories/{{ $blog->category->slug }}" class="text-blue-500">{{ $blog->category->name }}</a>
-                        </a>
-                        <small>&nbsp;{{ $blog->created_at->diffForHumans() }}</small>
+                        @if ($blog->user)
+                            <a href="/authors/{{ $blog->user->username }}" class="text-blue-500">{{ $blog->user->name }}</a>
+                        @else
+                            Unknown User
+                        @endif
+                        <span class="text-black"> in </span>
+                        <small>{{ $blog->created_at->diffForHumans() }}</small>
                     </p>
                 </div>
                 <br>

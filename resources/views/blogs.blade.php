@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-<div id="blogRender" class="opacity-0 transition-opaycit duration-1000 over py-16 ">
+<div id="blogRender" class="opacity-0 transition-opaycit duration-1000 over mt-20 ">
     <div>
         <h1 class="flex items-center justify-center p-4 font-semibold text-2xl">now you are in Blogs page</h1>     
         <form action='/blogs' class="max-w-md mx-auto">   
@@ -25,21 +25,26 @@
                 <a href="/blogs/{{ $blog->slug}}" class="flex flex-col items-center relative rounded-t-lg overflow-hidden">
                     <div class="min-w-96 min-h-96">
                         <div class="absolute inset-0 bg-gray-400 animate-pulse"></div>
-                        <img src="https://source.unsplash.com/400x300/?{{ $blog->category->name }}" class="absolute inset-0 w-full h-full object-cover rounded-t-lg" alt="Blog Image">
+                        @if ($blog->image)
+                        <img src="{{ asset('storage/' . $blog->image) }}" class="absolute inset-0 w-full h-full object-cover rounded-t-lg" alt="Blog Image">
+                        @else
+                            <img src="https://source.unsplash.com/1900x650/?{{ $blog->category->name }}" class="absolute inset-0 w-full h-full object-cover rounded-t-lg" alt="Blog Image">
+                        @endif
                     </div>
                     <a href="/categories/{{ $blog->category->slug }}" class=" absolute bg-black text-white bg-opacity-75 text-center font-bold text-2xl p-4 rounded-tl-lg rounded-br-lg color-white">{{ $blog->category->name }}</a>
                 </a>
-
                 <div class="p-3">
                     <div>
                         <a href="/blogs/{{ $blog->slug }}" class="text-xl font-bold mb-2">{{ $blog->title }}</a>
                         <br>
-                        <p>By. 
-                            <a href="/authors/{{ $blog->user->username }}" class="text-blue-500">{{ $blog->user->name }} 
-                                <span class="text-black"> in </span> 
-                                
-                            </a>
-                            <small>&nbsp;{{ $blog->created_at->diffForHumans() }}</small>
+                        <p>By.
+                            @if ($blog->user)
+                                <a href="/authors/{{ $blog->user->username }}" class="text-blue-500">{{ $blog->user->name }}</a>
+                            @else
+                                Unknown User
+                            @endif
+                            <span class="text-black"> in </span>
+                            <small>{{ $blog->created_at->diffForHumans() }}</small>
                         </p>
                     </div>
                     <br>
@@ -54,12 +59,10 @@
         <p class="text-2xl font-bold">No Blogs Found. :(</p>
     </div>
     @endif
-    
-    
-
-        <div class="flex justify-center mt-9 ">
-            {{ $blogs->Links('vendor.pagination.tailwind') }}
-        </div>
+    <div class="flex justify-center mt-9 ">
+        {{ $blogs->Links('vendor.pagination.tailwind') }}
+    </div>
+</div>
 <script>
     setTimeout(function() {
         document.getElementById("blogRender").classList.add("opacity-100");

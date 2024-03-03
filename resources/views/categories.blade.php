@@ -1,11 +1,10 @@
 @extends('layouts.main')
 
 @section('container')
-<div id="myText2"  class="pt-16 opacity-0 transition-opaycit duration-1000">
+<div id="myText2" class="mt-20 opacity-0 transition-opaycit duration-1000">
     <div>
         <h1 class="flex items-center justify-center p-4 font-semibold text-2xl">now you are in Categories page</h1>
     </div>
-    
     <div class="flex flex-wrap justify-center gap-5 p-5 ">
         @foreach ($categories as $category)
         <a href="/categories/{{ $category->name }}" class="flex flex-col items-center relative rounded-lg overflow-hidden">

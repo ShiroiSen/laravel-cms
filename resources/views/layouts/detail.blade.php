@@ -8,7 +8,7 @@
     <title>BlogID | {{ $title }}</title>
 </head>
 <body>
-   @include('partials.navbar2')
+   @include('partials.navbarDetail')
 
     <main>
         @yield('container')

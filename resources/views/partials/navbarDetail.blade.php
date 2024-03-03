@@ -10,20 +10,18 @@
     <div class="flex items-center justify-around bg-gray-900 p-4 font-semibold fixed top-0 left-0 right-0 z-[1000]">
         <!-- Bagian kiri -->
         <div class="flex items-center">
-            <a href="/dashboard">
-                <p class="text-white text-lg">
-                    Blog<span class="text-blue-700 hover:text-red-700">ID</span>
-                </p>
-            </a>    
+            <a href="/blogs" class="text-white hover:text-blue-700">
+                <p id="myText" class="opacity-0 transition-opacity duration-1000">< Back</p>
+            </a>
         </div>
-    
+
         <!-- Bagian tengah -->
         <div class="flex items-center ">
-            <a href="/dashboard" class="text-white hover:text-blue-700 py-2 px-3 {{ Request::is('dashboard*') ? '!text-blue-700' : '' }}">Dashboard</a>
-            <a href="/categories" class="text-white hover:text-blue-700 py-2 px-3 {{ Request::is('categories') ? '!text-blue-700' : '' }}">Categories</a>
-            <a href="/blogs" class="text-white hover:text-blue-700 py-2 px-3 {{ Request::is('blogs') ? '!text-blue-700' : '' }}">Blogs</a>
+            <a href="/dashboard" class="text-white hover:text-blue-700 py-2 px-3">Dashboard</a>
+            <a href="/categories" class="text-white hover:text-blue-700 py-2 px-3">Categories</a>
+            <a href="/blogs" class="text-white hover:text-blue-700 py-2 px-3">Blogs</a>
         </div>
-    
+
         <!-- Bagian kanan -->
         <div class="flex items-center space-x-4">
             <div class="relative">
@@ -57,6 +55,7 @@
             </div>
         </div>
     </div>
+
     <script>
         const dropdownButton = document.getElementById('dropdownHoverButton');
         const dropdownMenu = document.getElementById('dropdownHover');
@@ -68,6 +67,10 @@
         dropdownMenu.addEventListener('mouseleave', () => {
             dropdownMenu.classList.add('hidden');
         });
+
+        setTimeout(function() {
+            document.getElementById("myText").classList.add("opacity-100");
+        }, 250);
     </script>
 </body>
 </html>
