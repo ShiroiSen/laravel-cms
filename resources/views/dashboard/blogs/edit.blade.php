@@ -5,7 +5,7 @@
     <div class="flex flex-row mb-9 gap-5">
         <p class="text-4xl">Create Blogs</p>
     </div>
-    <form method="POST" action="/dashboard/blogs/{{ $blog->slug }}">
+    <form method="POST" action="/dashboard/blogs/{{ $blog->slug }}" enctype="multipart/form-data">
         @method('put')
         @csrf
         <div class="mb-6">
@@ -19,7 +19,7 @@
         </div> 
         <div class="mb-6">
             <label for="slug" class="block mb-2 text-sm font-medium">Slug</label>
-            <input type="text" id="slug" name="slug" class="text-sm text-gray-600 rounded-lg block w-full border border-black p-2.5 placeholder:text-gray-600 @error('slug') border-red-500 @enderror" placeholder="Slug Auto Regenerate" value="{{ old('slug', $blog->slug) }}" disabled>
+            <input type="text" id="slug" name="slug" class="text-sm text-gray-600 rounded-lg block w-full border border-black p-2.5 placeholder:text-gray-600 @error('slug') border-red-500 @enderror" placeholder="Slug Auto Regenerate" value="{{ old('slug', $blog->slug) }}">
             @error('slug')
             <div class="text-red-500 text-sm mt-1">
                 {{  $message }}
@@ -44,6 +44,21 @@
             @enderror
         </div>
         <div class="mb-6">
+            <label class="block mb-2 text-sm font-medium" for="image">Blog Image</label>
+            <input type="hidden" name="oldImage" value="{{ $blog->image }}">
+            @if ($blog->image)
+                <img src="{{ asset('storage/' . $blog->image) }}" class="img-preview img-fluid rounded-lg mb-6 max-w-lg">
+            @else
+                <img class="img-preview img-fluid rounded-lg mb-6 max-w-lg">
+            @endif
+            <input class="p-2.5 block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none border-gray-600 placeholder-gray-400 @error('image') border-red-500 @enderror" type="file" value="{{ old('image') }}"  id="image" name="image" onchange="previewImage()">
+            @error('image')
+            <div class="text-red-500 text-sm mt-1">
+                {{  $message }}
+            </div>
+            @enderror
+        </div>
+        <div class="mb-6">
             <label for="body" class="block mb-2 text-sm font-medium">Body</label>
             <input id="body" type="hidden" name="body" value="{{ old('body', $blog->body) }}">
             <trix-editor input="body"></trix-editor>
@@ -53,7 +68,10 @@
             </div>
             @enderror
         </div>
-        <button type="submit" class="focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Update</button>
+        <label for="is_confirm" class="hidden"></label>
+        <input type="text" id="is_confirm" name="is_confirm" class="hidden" value="pending">
+        <button type="submit" name="confirm" class="focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mb-6 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Update</button>
+
     </form>
 </div>
 <script>
@@ -69,5 +87,19 @@
     document.addEventListener('trix-file-accept', function(e) {
         e.preventDefault();
     });
+
+    function previewImage() {
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
 </script>
 @endsection

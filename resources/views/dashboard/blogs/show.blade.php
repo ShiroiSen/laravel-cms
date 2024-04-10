@@ -2,6 +2,7 @@
 
 @section('container')
 <div class="mt-12">
+    @can('auth')
     <div class="flex flex-row justify-center gap-5 mb-9">
         <a href="/dashboard/blogs" class="hover:text-blue-700 flex flex-row text-lg align-middle border border-black p-2 rounded-lg">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -26,6 +27,17 @@
             </button>
         </form>
     </div>
+    @endcan
+    @can('admin')
+    <div class="flex flex-row justify-center gap-5 mb-9">
+        <a href="/dashboard/confirms" class="hover:text-blue-700 flex flex-row text-lg align-middle border border-black p-2 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+            </svg>
+            &nbsp;Back
+        </a>
+    </div>
+    @endcan
     <div class="flex justify-center flex-col max-w-[80ch] mx-auto">
         <div class="flex flex-col items-center relative">
             <div class="relative w-full h-[400px]">

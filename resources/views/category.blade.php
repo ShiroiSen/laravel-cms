@@ -7,7 +7,7 @@
     <div>
         <h1 class="flex items-center justify-center p-4 font-semibold text-2xl">now you are in category :<span class="text-blue-700 ml-2">{{ $category }}</span></h1>
     </div>
-    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl rounded-lg px-5 sm:px-16 md:px-36 xl:px-44 ">
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3 2xl rounded-lg px-5 sm:px-16 md:px-36 xl:px-44 mt-9">
         @foreach ($blogs as $blog)
         <div class="flex flex-col rounded-lg border border-gray-400 ">
             <a href="/categories/{{ $blog->category->slug }}" class="flex flex-col items-center relative rounded-t-lg overflow-hidden">

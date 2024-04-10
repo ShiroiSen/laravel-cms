@@ -43,8 +43,9 @@
             @enderror
         </div>
         <div class="mb-6">
-            <label class="block mb-2 text-sm font-medium" for="image">Blog Image</label>
-            <input class="p-2.5 block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none border-gray-600 placeholder-gray-400 @error('image') border-red-500 @enderror" id="image" name="image" type="file">
+            <label class="block mb-2 text-sm font-medium" for="image">Blog Image (Opsional)</label>
+            <img class="img-preview img-fluid rounded-lg mb-6 max-w-lg">
+            <input class="p-2.5 block w-full text-sm border rounded-lg cursor-pointer text-gray-400 focus:outline-none border-gray-600 placeholder-gray-400 @error('image') border-red-500 @enderror" type="file" value="{{ old('image') }}"  id="image" name="image" onchange="previewImage()">
             @error('image')
             <div class="text-red-500 text-sm mt-1">
                 {{  $message }}
@@ -61,7 +62,7 @@
             </div>
             @enderror
         </div>
-        <button type="submit" class="focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Create</button>
+        <button type="submit" class="mb-6 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Create</button>
     </form>
 </div>
 <script>
@@ -77,5 +78,19 @@
     document.addEventListener('trix-file-accept', function(e) {
         e.preventDefault();
     });
+
+    function previewImage() {
+        const image = document.querySelector('#image');
+        const imgPreview = document.querySelector('.img-preview');
+
+        imgPreview.style.display = 'block';
+
+        const oFReader = new FileReader();
+        oFReader.readAsDataURL(image.files[0]);
+
+        oFReader.onload = function(oFREvent) {
+            imgPreview.src = oFREvent.target.result;
+        }
+    }
 </script>
 @endsection
