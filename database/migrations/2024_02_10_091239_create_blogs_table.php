@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->text('body');
             $table->timestamp('publish_at')->nullable();
+            $table->string('is_confirmed')->default('pending');
             $table->timestamps();
         });
     }
