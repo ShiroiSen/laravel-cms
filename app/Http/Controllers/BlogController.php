@@ -12,13 +12,13 @@ class BlogController extends Controller
         $blogs = Blog::latest();
 
         if(request('searchblog')) {
-            $blogs->where('title', 'like', '%' . request('search') . '%');
+            $blogs->where('title', 'like', '%' . request('searchblog') . '%');
         }
-
+        
         return view('blogs', [
             "title" => "Blogs",
-            "blogs" => $blogs->paginate(12)
-        ]);
+            "blogs" => $blogs->where('is_confirmed', 'confirmed')->paginate(12)
+        ]);        
     }
     
     public function show(Blog $blog)
@@ -28,4 +28,21 @@ class BlogController extends Controller
             "blog" => $blog
         ]);
     }
+
+    // public function confirm(Blog $blog)
+    // {
+    //     $blog->is_confirmed = true;
+    //     $blog->save();
+
+    //     return redirect()->back()->with('success', 'Blog has been confirmed.');
+    // }
+
+    // public function reject(Blog $blog)
+    // {
+    //     $blog->is_confirmed = false;
+    //     $blog->save();
+
+    //     return redirect()->back()->with('success', 'Blog has been rejected.');
+    // }
+
 }
