@@ -31,12 +31,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard.general', [
         "title" => "Dashboard",
+        "blogs" => Blog::where('user_id', auth()->user()->id)->get()
     ]);
 })->middleware('auth');
 
 Route::resource('/dashboard/blogs', DashBlogController::class)->middleware('auth');
-
-Route::get('/dashboard/blogs/trash', [DashBlogController::class, 'indexDua'])->middleware('auth');
 
 Route::get('/dashboard/blogs/checkSlug', [DashBlogController::class, 'checkSlug'])->middleware('auth');
 

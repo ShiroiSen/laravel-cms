@@ -25,7 +25,7 @@
                     <div class="min-w-96 min-h-96">
                         <div class="absolute inset-0 bg-gray-400 animate-pulse"></div>
                         @if ($blog->image)
-                        <img src="{{ asset('storage/' . $blog->image) }}" class="absolute inset-0 w-full h-full object-cover rounded-t-lg" alt="Blog Image">
+                            <img src="{{ asset('storage/' . $blog->image) }}" class="absolute inset-0 w-full h-full object-cover rounded-t-lg" alt="Blog Image">
                         @else
                             <img src="https://source.unsplash.com/1900x650/?{{ $blog->category->name }}" class="absolute inset-0 w-full h-full object-cover rounded-t-lg" alt="Blog Image">
                         @endif

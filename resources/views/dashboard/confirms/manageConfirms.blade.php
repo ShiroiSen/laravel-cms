@@ -28,9 +28,9 @@
             <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow lg:flex-row lg:justify-between lg:min-w-[1152px] lg:max-w-6xl hover:bg-gray-100">
                 <div class="flex flex-col lg:flex-row lg:justify-between w-full">
                     @if ($blog->image)
-                        <img src="{{ asset('storage/' . $blog->image) }}" class="object-cover min-w-48 min-h-48 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" alt="Blog Image">
+                        <img src="{{ asset('storage/' . $blog->image) }}" class="object-cover min-w-48 min-h-48 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg " alt="Blog Image">
                     @else
-                        <img src="https://source.unsplash.com/1900x650/?{{ $blog->category->name }}" class="object-cover min-w-48 min-h-48 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" alt="">
+                        <img src="https://source.unsplash.com/1900x650/?{{ $blog->category->name }}" class="object-cover min-w-48 min-h-48 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg bg-gray-400 animate-pulse" alt="">
                     @endif
                     <div class="flex justify-between w-full">
                         <div class="flex flex-col justify-between p-4 leading-normal">

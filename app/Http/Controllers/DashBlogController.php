@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Storage;
 
 class DashBlogController extends Controller
 {
@@ -86,7 +87,9 @@ class DashBlogController extends Controller
         $rules = [
             'title' => ['required', 'max:255'],
             'category_id' => ['required'],
-            'body' => ['required']
+            'image' => ['image', 'file', 'max:1024'],
+            'body' => ['required'],
+            'is_confirm' => ['required', 'in:pending'],
         ];
 
         if ($request->slug != $blog->slug) {
@@ -95,9 +98,23 @@ class DashBlogController extends Controller
 
         $validatedData = $request->validate($rules);
 
+        if($request->file('image')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['image'] = $request->file('image')->store('blog-images');
+        }
+
         $validatedData['user_id'] = auth()->user()->id;
 
-        Blog::where('id', $blog->id)->update($validatedData);
+        Blog::where('id', $blog->id)->update([
+            'title' => $validatedData['title'],
+            'category_id' => $validatedData['category_id'],
+            'user_id' => $validatedData['user_id'],
+            'body' => $validatedData['body'],
+            'is_confirmed' => $validatedData['is_confirm']
+        ]);
+        
 
         return redirect('/dashboard/blogs')->with('success', 'Blog has been updated!');
     }
@@ -107,6 +124,10 @@ class DashBlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+        if ($blog->image) {
+            Storage::delete($blog->image);
+        }
+
         Blog::destroy($blog->id);
 
         return redirect('/dashboard/blogs')->with('success', 'Blog has been deleted!');
